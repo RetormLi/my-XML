@@ -1,0 +1,40 @@
+{
+  "dataset_reader": {
+    "type": "eurlex_bow_reader",
+    "label_size": 3993,
+    "feature_size": 5000,
+    "max_num_tokens": 40000,
+    "lazy": true
+  },
+  "train_data_path": "E:\\NLP\\XML-Reasoner\\data\\Eurlex4kbow\\eurlex_train.txt",
+  "test_data_path": "E:\\NLP\\XML-Reasoner\\data\\Eurlex4kbow\\eurlex_test.txt",
+  "validation_data_path": "E:\\NLP\\XML-Reasoner\\data\\Eurlex4kbow\\eurlex_test.txt",
+  "evaluate_on_test": false,
+  "model": {
+    "type": "rankae",
+    "feature_size": 5000,
+    "label_size": 3993,
+    "hidden_size": 100,
+    "latent_size": 100,
+    "reduction_ratio": 4,
+    "batch_size": 2,
+    "loss_lambda": 0.01,
+    "loss_m": 0.1,
+    "predict_threshold": 0.5
+  },
+  "iterator": {
+    "type": "basic",
+    "batch_size": 2
+  },
+  "trainer": {
+    "num_epochs": 100,
+    "patience": 100,
+    "num_serialized_models_to_keep": 2,
+    "validation_metric": "+fscore",
+    "cuda_device": -1,
+    "optimizer": {
+      "type": "adamax"
+    },
+    "should_log_learning_rate": true
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "dataset_reader": {
+    "type": "aapd_reader",
+    "token_indexers": {
+      "tokens": {
+        "type": "single_id"
+      }
+    },
+    "label_token_indexers": {
+      "tokens": {
+        "type": "single_id",
+        "namespace": "label_tokens"
+      }
+    },
+    "label_dict": "E:/NLP/XML-Reasoner/data/AAPD/sample.label_dict.json",
+    "max_num_tokens": 256,
+    "labels_are_sequence": true,
+    "order_labels": true,
+    "lazy": true
+  },
+  "train_data_path": "E:/NLP/XML-Reasoner/data/AAPD/sample.aapd.txt",
+  "test_data_path": "E:/NLP/XML-Reasoner/data/AAPD/sample.aapd.txt",
+  "validation_data_path": "E:/NLP/XML-Reasoner/data/AAPD/sample.aapd.txt",
+  "evaluate_on_test": false,
+  "model": {
+    "type": "sgm",
+    "text_field_embedder": {
+      "token_embedders": {
+        "tokens": {
+          "type": "embedding",
+          "pretrained_file": "E:/NLP/XML-Reasoner/data/GloVe/glove.840B.300d.txt",
+          "embedding_dim": 300,
+          "trainable": true,
+          "padding_index": 0
+        }
+      }
+    },
+    "encoder_num_layers": 2,
+    "decoder_hidden_size": 256,
+    "decoder_num_layers": 2,
+    "encoder_hidden_size": 128,
+    "dropout": 0.5,
+    "batch_size": 5,
+    "bottleneck_size": 100,
+    "max_time_step": 30,
+    "beam_size": 2,
+    "target_embedding_dim": 300,
+    "target_namespace": "label_tokens"
+  },
+  "iterator": {
+    "type": "basic",
+    "batch_size": 5
+  },
+  "trainer": {
+    "num_epochs": 100,
+    "patience": 100,
+    "num_serialized_models_to_keep": 2,
+    "validation_metric": "+fscore",
+    "cuda_device": -1,
+    "optimizer": {
+      "type": "adamax",
+      "lr": 1e-1
+    },
+    "should_log_learning_rate": true
+  }
+}

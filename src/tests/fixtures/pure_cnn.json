@@ -1,0 +1,49 @@
+{
+  "dataset_reader": {
+    "type": "eur_lex_reader",
+    "texts": "texts.txt",
+    "labels": "labels.txt",
+    "label_dict": "/Users/wrran/ws/XML-Reasoner/src/tests/fixtures/EURLEX/sample/label_dict.json",
+    "max_num_tokens": 3000,
+    "token_indexers": {
+      "tokens": {
+        "type": "single_id"
+      }
+    }
+  },
+  "train_data_path": "/Users/wrran/ws/XML-Reasoner/src/tests/fixtures/EURLEX/sample/train/",
+  "validation_data_path": "/Users/wrran/ws/XML-Reasoner/src/tests/fixtures/EURLEX/sample/train/",
+  "test_data_path": "/Users/wrran/ws/XML-Reasoner/src/tests/fixtures/EURLEX/sample/train/",
+  "evaluate_on_test": true,
+  "model": {
+    "type": "pure_cnn",
+    "text_field_embedder": {
+      "token_embedders": {
+        "tokens": {
+          "type": "embedding",
+          "embedding_dim": 300,
+          "trainable": true,
+          "padding_index": 0
+        }
+      }
+    },
+    "num_filters": 128,
+    "ngram_filter_sizes": [3, 4, 5],
+    "dropout": 0.5,
+    "label_size": 97,
+    "activation": "relu"
+  },
+  "iterator": {
+    "type": "basic",
+    "batch_size": 64
+  },
+  "trainer": {
+    "num_epochs": 300,
+    "num_serialized_models_to_keep": 2,
+    "validation_metric": "+P@5",
+    "cuda_device": [0],
+    "optimizer": {
+      "type": "adamax"
+    }
+  }
+}

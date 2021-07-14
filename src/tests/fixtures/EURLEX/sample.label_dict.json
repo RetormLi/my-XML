@@ -1,0 +1,22 @@
+{
+  "fishery_product": 1,
+  "processed_foodstuff": 2,
+  "ship's_flag": 3,
+  "third_country": 4,
+  "originating_product": 5,
+  "export_refund": 6,
+  "beef": 7,
+  "market_support": 8,
+  "france": 9,
+  "award_of_contract": 10,
+  "aid_to_disadvantaged_groups": 11,
+  "international_agreement": 12,
+  "international_market": 13,
+  "shipbuilding": 14,
+  "south_korea": 15,
+  "unseen_label_1": 16,
+  "unseen_label_2": 17,
+  "unseen_label_3": 18,
+  "unseen_label_4": 19,
+  "unseen_label_5": 20
+}

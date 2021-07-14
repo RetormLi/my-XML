@@ -1,0 +1,71 @@
+{
+  "dataset_reader": {
+    "type": "aapd_reader",
+    "token_indexers": {
+      "tokens": {
+        "type": "single_id"
+      }
+    },
+    "label_token_indexers": {
+      "tokens": {
+        "type": "single_id",
+        "namespace": "label_tokens"
+      }
+    },
+    "label_dict": "/home/user_data55/wangr/ws/XML-Reasoner/data/AAPD/train/label_dict.json",
+    "max_num_tokens": 40000,
+    "labels_are_sequence": true,
+    "order_labels": true,
+    "lazy": true
+  },
+  "train_data_path": "/home/user_data55/wangr/ws/XML-Reasoner/data/AAPD/sample.aapd.txt",
+  "test_data_path": "/home/user_data55/wangr/ws/XML-Reasoner/data/AAPD/sample.aapd.txt",
+  "validation_data_path": "/home/user_data55/wangr/ws/XML-Reasoner/data/AAPD/sample.aapd.txt",
+  "evaluate_on_test": true,
+  "model": {
+    "type": "sgm",
+    "text_field_embedder": {
+      "token_embedders": {
+        "tokens": {
+          "type": "embedding",
+          "pretrained_file": "/home/user_data/wangr/.data/.allennlp/datasets/glove/glove.840B.300d.zip",
+          "embedding_dim": 300,
+          "trainable": true,
+          "padding_index": 0
+        }
+      }
+    },
+    "encoder": {
+      "type": "lstm",
+      "input_size": 300,
+      "hidden_size": 256,
+      "num_layers": 2,
+      "dropout": 0.2,
+      "bidirectional": true
+    },
+    "decoder_hidden_size": 512,
+    "encoder_hidden_size": 256,
+    "dropout": 0.2,
+    "batch_size": 8,
+    "bottleneck_size": 100,
+    "max_time_step": 60,
+    "beam_size": 9,
+    "target_embedding_dim": 300,
+    "target_namespace": "label_tokens"
+  },
+  "iterator": {
+    "type": "basic",
+    "batch_size": 8
+  },
+  "trainer": {
+    "num_epochs": 100,
+    "patience": 100,
+    "num_serialized_models_to_keep": 2,
+    "validation_metric": "+multi_label_hamming_loss",
+    "cuda_device": -1,
+    "optimizer": {
+      "type": "adamax"
+    },
+    "should_log_learning_rate": true
+  }
+}
