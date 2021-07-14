@@ -1,3 +1,3 @@
 # my-XML
 My implementation of XML classification in AllenNLP.
-Include RankAE and SGM. Tested on Eurlex and AAPD dataset.
+RankAE and SGM Included. Tested on Eurlex and AAPD dataset.
